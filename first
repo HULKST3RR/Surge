@@ -1,0 +1,701 @@
+index.html
+<!DOCTYPE html>
+<html lang="en" data-theme="light">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Surge | Elite Technical Swimming. Built for Everyone.</title>
+<meta name="description" content="Surge is a high-school-led non-profit delivering elite stroke mechanics, video analysis, and race analytics through affordable group lessons.">
+
+<!-- ============ LOGO SLOT 4: FAVICON / BROWSER TAB ============ -->
+<link rel="icon" type="image/png" sizes="512x512" href="assets/favicon.png">
+<link rel="apple-touch-icon" href="assets/favicon.png">
+<meta name="theme-color" content="#0A1128">
+
+<style>
+/* ============================================================
+   SURGE DESIGN SYSTEM ,  Apple-inspired tokens
+   ============================================================ */
+:root{
+  --obsidian:#0A1128;
+  --surge:#0071E3;
+  --surge-hover:#0077ED;
+  --white:#FFFFFF;
+  --slate:#F5F5F7;
+  --ink:#1D1D1F;
+  --ink-2:#6E6E73;
+  --line:rgba(0,0,0,.08);
+  --glass:rgba(255,255,255,.72);
+  --glass-border:rgba(255,255,255,.55);
+  --bg:var(--white);
+  --bg-alt:var(--slate);
+  --fg:var(--ink);
+  --fg-2:var(--ink-2);
+  --card:var(--white);
+  --shadow:0 20px 60px -20px rgba(10,17,40,.18);
+  --radius:22px;
+  --ease:cubic-bezier(.22,1,.36,1);
+}
+[data-theme="dark"]{
+  --bg:var(--obsidian);
+  --bg-alt:#0F1733;
+  --fg:#F5F5F7;
+  --fg-2:#A1A1A6;
+  --line:rgba(255,255,255,.10);
+  --glass:rgba(15,23,51,.62);
+  --glass-border:rgba(255,255,255,.12);
+  --card:#111A3A;
+  --shadow:0 20px 60px -20px rgba(0,0,0,.6);
+}
+*{box-sizing:border-box;margin:0;padding:0}
+html{scroll-behavior:smooth;-webkit-font-smoothing:antialiased}
+body{
+  font-family:-apple-system,BlinkMacSystemFont,"SF Pro Display","SF Pro Text","Inter","Helvetica Neue",Arial,sans-serif;
+  background:var(--bg);color:var(--fg);line-height:1.5;
+  transition:background .4s var(--ease),color .4s var(--ease);
+}
+img{display:block;max-width:100%}
+a{color:inherit;text-decoration:none}
+button{font:inherit;cursor:pointer;border:0;background:none;color:inherit}
+.container{width:min(1180px,calc(100% - 48px));margin-inline:auto}
+section{padding:120px 0}
+@media(max-width:768px){section{padding:80px 0}}
+
+/* Typography */
+.eyebrow{font-size:13px;font-weight:600;letter-spacing:.12em;text-transform:uppercase;color:var(--surge)}
+h1{font-size:clamp(40px,6.4vw,76px);font-weight:700;letter-spacing:-.035em;line-height:1.02}
+h2{font-size:clamp(32px,4.6vw,56px);font-weight:700;letter-spacing:-.03em;line-height:1.06}
+h3{font-size:22px;font-weight:600;letter-spacing:-.015em}
+.lead{font-size:clamp(17px,1.6vw,21px);color:var(--fg-2);font-weight:400;max-width:62ch}
+.muted{color:var(--fg-2)}
+.center{text-align:center}
+.stack>*+*{margin-top:16px}
+.section-head{max-width:760px;margin:0 auto 64px;text-align:center}
+.section-head .lead{margin-inline:auto}
+
+/* Buttons */
+.btn{display:inline-flex;align-items:center;gap:8px;padding:14px 26px;border-radius:999px;font-weight:600;font-size:16px;
+  transition:transform .35s var(--ease),background .3s,box-shadow .35s var(--ease)}
+.btn:hover{transform:translateY(-2px)}
+.btn:active{transform:translateY(0) scale(.98)}
+.btn-primary{background:var(--surge);color:#fff;box-shadow:0 10px 30px -10px rgba(0,113,227,.6)}
+.btn-primary:hover{background:var(--surge-hover);box-shadow:0 16px 40px -10px rgba(0,113,227,.7)}
+.btn-ghost{background:transparent;color:var(--surge);border:1.5px solid var(--surge)}
+.btn-ghost:hover{background:rgba(0,113,227,.08)}
+.btn-sm{padding:10px 18px;font-size:14px}
+.link-arrow{color:var(--surge);font-weight:600;display:inline-flex;align-items:center;gap:6px}
+.link-arrow svg{transition:transform .3s var(--ease)}
+.link-arrow:hover svg{transform:translateX(4px)}
+
+/* Glass */
+.glass{background:var(--glass);backdrop-filter:blur(24px) saturate(160%);-webkit-backdrop-filter:blur(24px) saturate(160%);
+  border:1px solid var(--glass-border);border-radius:var(--radius);box-shadow:var(--shadow)}
+
+/* Cards */
+.card{background:var(--card);border:1px solid var(--line);border-radius:var(--radius);padding:36px;
+  transition:transform .5s var(--ease),box-shadow .5s var(--ease),border-color .3s}
+.card:hover{transform:translateY(-6px);box-shadow:var(--shadow);border-color:rgba(0,113,227,.25)}
+.grid{display:grid;gap:24px}
+.grid-2{grid-template-columns:repeat(2,1fr)}
+.grid-3{grid-template-columns:repeat(3,1fr)}
+@media(max-width:900px){.grid-3{grid-template-columns:1fr}.grid-2{grid-template-columns:1fr}}
+
+/* Icons */
+.icon{width:44px;height:44px;border-radius:12px;display:grid;place-items:center;background:rgba(0,113,227,.10);color:var(--surge);margin-bottom:22px}
+.icon svg{width:22px;height:22px;stroke:currentColor;fill:none;stroke-width:1.8;stroke-linecap:round;stroke-linejoin:round}
+
+/* Badge / divider */
+.badge{display:inline-flex;align-items:center;gap:8px;padding:6px 12px;border-radius:999px;font-size:12px;font-weight:600;letter-spacing:.04em;
+  background:rgba(0,113,227,.10);color:var(--surge)}
+.divider{height:1px;background:linear-gradient(90deg,transparent,var(--line),transparent);margin:0 auto;width:min(1180px,calc(100% - 48px))}
+
+/* Reveal on scroll */
+.reveal{opacity:0;transform:translateY(24px);transition:opacity .8s var(--ease),transform .8s var(--ease)}
+.reveal.in{opacity:1;transform:none}
+
+/* ============ NAV ============ */
+.nav{position:fixed;top:0;left:0;right:0;z-index:100;transition:background .4s,box-shadow .4s,border-color .4s;border-bottom:1px solid transparent}
+.nav.scrolled{background:var(--glass);backdrop-filter:blur(24px) saturate(160%);-webkit-backdrop-filter:blur(24px) saturate(160%);border-color:var(--line)}
+.nav-inner{display:flex;align-items:center;justify-content:space-between;height:64px}
+.nav-logo{display:flex;align-items:center;height:36px}
+.nav-logo img{height:36px;width:auto}
+.nav-logo .logo-dark{display:none}
+[data-theme="dark"] .nav-logo .logo-light{display:none}
+[data-theme="dark"] .nav-logo .logo-dark{display:block}
+.nav-links{display:flex;gap:32px;font-size:14px;font-weight:500}
+.nav-links a{opacity:.8;transition:opacity .2s}
+.nav-links a:hover{opacity:1;color:var(--surge)}
+.nav-right{display:flex;align-items:center;gap:14px}
+.theme-toggle{width:38px;height:38px;border-radius:50%;display:grid;place-items:center;border:1px solid var(--line);transition:background .3s}
+.theme-toggle:hover{background:rgba(0,113,227,.08)}
+.theme-toggle svg{width:18px;height:18px;stroke:currentColor;fill:none;stroke-width:1.8;stroke-linecap:round}
+.theme-toggle .moon{display:none}
+[data-theme="dark"] .theme-toggle .sun{display:none}
+[data-theme="dark"] .theme-toggle .moon{display:block}
+.burger{display:none;width:38px;height:38px;place-items:center}
+.burger svg{width:22px;height:22px;stroke:currentColor;fill:none;stroke-width:1.8;stroke-linecap:round}
+@media(max-width:900px){.nav-links,.nav-cta{display:none}.burger{display:grid}}
+.mobile-menu{display:none;position:fixed;inset:64px 0 0;background:var(--bg);z-index:99;padding:32px 24px;flex-direction:column;gap:22px;font-size:22px;font-weight:600}
+.mobile-menu.open{display:flex}
+
+/* ============ HERO ============ */
+.hero{position:relative;min-height:100vh;display:grid;align-items:center;padding:140px 0 100px;overflow:hidden}
+.hero-bg{position:absolute;inset:0;z-index:0}
+.hero-bg img{width:100%;height:100%;object-fit:cover;opacity:.9}
+[data-theme="dark"] .hero-bg img{opacity:.14}
+.hero-bg::after{content:"";position:absolute;inset:0;background:linear-gradient(180deg,var(--bg) 0%,transparent 30%,transparent 70%,var(--bg) 100%)}
+/* LOGO SLOT 2: hero watermark */
+.hero-emblem{position:absolute;right:-6%;top:50%;transform:translateY(-50%);width:min(58vw,720px);opacity:.06;z-index:0;pointer-events:none;filter:grayscale(1)}
+[data-theme="dark"] .hero-emblem{opacity:.08;filter:grayscale(1) invert(1)}
+.hero-inner{position:relative;z-index:1;display:grid;grid-template-columns:1.1fr .9fr;gap:60px;align-items:center}
+@media(max-width:900px){.hero-inner{grid-template-columns:1fr}}
+.hero-ctas{display:flex;gap:14px;flex-wrap:wrap;margin-top:36px}
+.hero-visual{position:relative}
+.hero-panel{padding:40px;display:grid;gap:26px}
+.hero-stat b{display:block;font-size:44px;font-weight:700;letter-spacing:-.04em;line-height:1;color:var(--surge)}
+.hero-stat span{font-size:14px;color:var(--fg-2);font-weight:500}
+.hero-stat+.hero-stat{padding-top:22px;border-top:1px solid var(--line)}
+.stat-badge{position:absolute;padding:16px 20px;border-radius:18px;display:flex;flex-direction:column;gap:2px;min-width:150px;
+  animation:float 6s ease-in-out infinite}
+.stat-badge b{font-size:26px;font-weight:700;letter-spacing:-.02em;line-height:1}
+.stat-badge span{font-size:12px;color:var(--fg-2);font-weight:500;letter-spacing:.04em;text-transform:uppercase}
+.sb-1{top:-5%;left:-10%}
+.sb-2{bottom:-5%;right:-8%;animation-delay:-2s}
+@media(max-width:900px){.sb-1{left:0}.sb-2{right:0}}
+@keyframes float{0%,100%{transform:translateY(0)}50%{transform:translateY(-10px)}}
+.trust-row{display:flex;gap:28px;flex-wrap:wrap;margin-top:40px;font-size:13px;color:var(--fg-2);font-weight:500}
+.trust-row span{display:flex;align-items:center;gap:8px}
+.trust-row svg{width:16px;height:16px;stroke:var(--surge);fill:none;stroke-width:2;stroke-linecap:round;stroke-linejoin:round}
+
+/* ============ DATA SECTION ============ */
+.data-section{background:var(--bg-alt);position:relative;overflow:hidden}
+.data-section::before{content:"";position:absolute;width:800px;height:800px;border-radius:50%;
+  background:radial-gradient(closest-side,rgba(0,113,227,.14),transparent);top:-300px;right:-200px}
+.data-card .big{font-size:clamp(44px,5vw,64px);font-weight:700;letter-spacing:-.04em;line-height:1;color:var(--surge);margin:12px 0 8px}
+.data-card .cite{font-size:12px;color:var(--fg-2);margin-top:22px;padding-top:16px;border-top:1px solid var(--line);line-height:1.5}
+.data-card .cite sup{color:var(--surge);font-weight:700}
+
+/* ============ COMPARISON ============ */
+.compare{border:1px solid var(--line);border-radius:var(--radius);overflow:hidden;background:var(--card)}
+.compare table{width:100%;border-collapse:collapse}
+.compare th,.compare td{padding:22px 28px;text-align:left;border-bottom:1px solid var(--line);font-size:15px}
+.compare th{font-size:13px;font-weight:600;letter-spacing:.08em;text-transform:uppercase;color:var(--fg-2)}
+.compare th.surge-col{color:var(--surge)}
+.compare td.surge-col{background:rgba(0,113,227,.05);font-weight:600}
+.compare tr:last-child td{border-bottom:0}
+.check,.cross{display:inline-grid;place-items:center;width:24px;height:24px;border-radius:50%;vertical-align:middle;margin-right:10px}
+.check{background:rgba(0,113,227,.12)}.check svg{stroke:var(--surge)}
+.cross{background:rgba(110,110,115,.12)}.cross svg{stroke:var(--fg-2)}
+.check svg,.cross svg{width:13px;height:13px;fill:none;stroke-width:2.4;stroke-linecap:round;stroke-linejoin:round}
+@media(max-width:768px){.compare th,.compare td{padding:16px 14px;font-size:13px}}
+
+/* ============ PROGRAMS ============ */
+.program{display:flex;flex-direction:column;gap:0}
+.program .price{display:flex;align-items:baseline;gap:6px;margin-top:auto;padding-top:24px}
+.program .price b{font-size:32px;letter-spacing:-.03em}
+.program .price s{color:var(--fg-2);font-size:14px}
+.program ul{list-style:none;margin:18px 0 0;display:grid;gap:10px;font-size:14px;color:var(--fg-2)}
+.program li{display:flex;gap:10px;align-items:flex-start}
+.program li svg{width:16px;height:16px;flex:none;stroke:var(--surge);fill:none;stroke-width:2;stroke-linecap:round;stroke-linejoin:round;margin-top:3px}
+.dollar-bar{display:flex;height:14px;border-radius:999px;overflow:hidden;margin:28px 0 20px}
+.dollar-bar div{transition:flex .6s var(--ease)}
+.dollar-legend{display:grid;grid-template-columns:repeat(4,1fr);gap:16px;font-size:14px}
+.dollar-legend b{display:block;font-size:20px;letter-spacing:-.02em}
+.dollar-legend i{display:inline-block;width:10px;height:10px;border-radius:3px;margin-right:8px;font-style:normal}
+@media(max-width:768px){.dollar-legend{grid-template-columns:repeat(2,1fr)}}
+
+/* ============ JOIN ============ */
+.join-card{position:relative;overflow:hidden;padding:48px;min-height:420px;display:flex;flex-direction:column;justify-content:flex-end;color:#fff;border-radius:var(--radius)}
+.join-card.dark{background:linear-gradient(160deg,#111A3A,#0A1128)}
+.join-card.blue{background:linear-gradient(160deg,#0A84FF,#0059B8)}
+.join-card > *{position:relative}
+.join-card p{color:rgba(255,255,255,.78);max-width:46ch}
+.join-card .btn{align-self:flex-start;margin-top:24px;background:#fff;color:var(--obsidian)}
+
+/* ============ LEADERSHIP ============ */
+.role{font-size:12px;color:var(--surge);font-weight:600;letter-spacing:.08em;text-transform:uppercase;margin-bottom:8px}
+.founder-card{display:grid;grid-template-columns:160px 1fr;gap:40px;align-items:center;padding:48px}
+.founder-mark{width:160px;height:160px;border-radius:50%;display:grid;place-items:center;background:rgba(0,113,227,.08);border:1px solid var(--line)}
+.founder-mark img{width:96px}
+.founder-tags{display:flex;flex-wrap:wrap;gap:8px;margin-top:22px}
+@media(max-width:768px){.founder-card{grid-template-columns:1fr;padding:32px}}
+.roles .card{display:flex;flex-direction:column;padding:28px}
+.roles h3{font-size:19px;margin-bottom:10px;display:flex;align-items:center;gap:10px;flex-wrap:wrap}
+.roles .muted{font-size:14px}
+.open-pill{font-size:11px;font-weight:600;letter-spacing:.06em;text-transform:uppercase;padding:3px 9px;border-radius:999px;background:rgba(0,113,227,.10);color:var(--surge)}
+.roles-cta{background:linear-gradient(160deg,rgba(0,113,227,.08),transparent)}
+
+/* ============ FOOTER ============ */
+footer{background:var(--obsidian);color:#F5F5F7;padding:96px 0 40px}
+footer a:hover{color:#fff}
+.foot-grid{display:grid;grid-template-columns:1.4fr 1fr 1fr 1.4fr;gap:48px}
+@media(max-width:900px){.foot-grid{grid-template-columns:1fr 1fr}}
+@media(max-width:600px){.foot-grid{grid-template-columns:1fr}}
+.foot-logo img{height:44px;width:auto;margin-bottom:20px}
+footer h4{font-size:13px;font-weight:600;letter-spacing:.1em;text-transform:uppercase;color:#A1A1A6;margin-bottom:18px}
+footer ul{list-style:none;display:grid;gap:12px;font-size:14px;color:#D2D2D7}
+footer .form{display:grid;gap:10px}
+footer input,footer textarea{width:100%;padding:12px 14px;border-radius:12px;border:1px solid rgba(255,255,255,.14);background:rgba(255,255,255,.06);color:#fff;font:inherit;font-size:14px}
+footer input::placeholder,footer textarea::placeholder{color:#8E8E93}
+footer input:focus,footer textarea:focus{outline:0;border-color:var(--surge)}
+.bib{margin-top:72px;padding-top:40px;border-top:1px solid rgba(255,255,255,.1)}
+.bib ol{padding-left:20px;display:grid;gap:12px;font-size:13px;color:#A1A1A6;line-height:1.6}
+.bib a{color:#D2D2D7;text-decoration:underline;text-underline-offset:3px}
+.foot-bottom{margin-top:48px;padding-top:24px;border-top:1px solid rgba(255,255,255,.1);display:flex;justify-content:space-between;gap:16px;flex-wrap:wrap;font-size:12px;color:#8E8E93}
+</style>
+</head>
+<body>
+
+<!-- ============================================================
+     1. NAVIGATION
+     ============================================================ -->
+<header class="nav" id="nav">
+  <div class="container nav-inner">
+    <!-- ===== LOGO SLOT 1: NAV HEADER (light + dark variants) ===== -->
+    <a href="#top" class="nav-logo" aria-label="Surge home">
+      <img class="logo-light" src="assets/surge-logo.png" alt="Surge">
+      <img class="logo-dark"  src="assets/surge-logo-dark.png" alt="Surge">
+    </a>
+
+    <nav class="nav-links" aria-label="Primary">
+      <a href="#mission">Mission</a>
+      <a href="#research">Data &amp; Research</a>
+      <a href="#programs">Programs</a>
+      <a href="#volunteers">Volunteers</a>
+      <a href="#leadership">Leadership</a>
+    </nav>
+
+    <div class="nav-right">
+      <button class="theme-toggle" id="themeToggle" aria-label="Toggle dark mode">
+        <svg class="sun" viewBox="0 0 24 24"><circle cx="12" cy="12" r="4"/><path d="M12 2v2M12 20v2M4.9 4.9l1.4 1.4M17.7 17.7l1.4 1.4M2 12h2M20 12h2M4.9 19.1l1.4-1.4M17.7 6.3l1.4-1.4"/></svg>
+        <svg class="moon" viewBox="0 0 24 24"><path d="M21 12.8A9 9 0 1 1 11.2 3a7 7 0 0 0 9.8 9.8z"/></svg>
+      </button>
+      <a href="#join" class="btn btn-primary btn-sm nav-cta">Book Group Session</a>
+      <button class="burger" id="burger" aria-label="Menu">
+        <svg viewBox="0 0 24 24"><path d="M4 7h16M4 12h16M4 17h16"/></svg>
+      </button>
+    </div>
+  </div>
+</header>
+<div class="mobile-menu" id="mobileMenu">
+  <a href="#mission">Mission</a><a href="#research">Data &amp; Research</a><a href="#programs">Programs</a>
+  <a href="#volunteers">Volunteers</a><a href="#leadership">Leadership</a>
+  <a href="#join" class="btn btn-primary">Book Group Session</a>
+</div>
+
+<main id="top">
+
+<!-- ============================================================
+     2. HERO
+     ============================================================ -->
+<section class="hero">
+  <div class="hero-bg"><img src="assets/hero-bg.png" alt=""></div>
+  <!-- ===== LOGO SLOT 2: HERO WATERMARK / EMBLEM ===== -->
+  <img class="hero-emblem" src="assets/surge-emblem.png" alt="" aria-hidden="true">
+
+  <div class="container hero-inner">
+    <div class="stack reveal">
+      <span class="badge">
+        <svg width="8" height="8" viewBox="0 0 8 8"><circle cx="4" cy="4" r="4" fill="currentColor"/></svg>
+        Student-led · Non-profit · Waxhaw, NC
+      </span>
+      <h1>Elite Technical Swimming.<br>Built for Everyone.</h1>
+      <p class="lead">Breakthrough stroke mechanics and video race analytics at a fraction of private coaching costs.</p>
+      <div class="hero-ctas">
+        <a href="#programs" class="btn btn-primary">Explore Group Lessons</a>
+        <a href="#research" class="btn btn-ghost">View Research &amp; Impact</a>
+      </div>
+      <div class="trust-row">
+        <span><svg viewBox="0 0 24 24"><path d="M20 6 9 17l-5-5"/></svg>Coached by national-level swimmers</span>
+        <span><svg viewBox="0 0 24 24"><path d="M20 6 9 17l-5-5"/></svg>Lifeguarded facilities only</span>
+        <span><svg viewBox="0 0 24 24"><path d="M20 6 9 17l-5-5"/></svg>100% of revenue reinvested</span>
+      </div>
+    </div>
+
+    <div class="hero-visual reveal">
+      <div class="hero-panel glass">
+        <p class="eyebrow">At a glance</p>
+        <div class="hero-stat"><b>$7</b><span>per hour, group technique lessons</span></div>
+        <div class="hero-stat"><b>90%+</b><span>cost savings vs. private coaching</span></div>
+        <div class="hero-stat"><b>1 : 4</b><span>coach to swimmer ratio</span></div>
+        <div class="hero-stat"><b>100%</b><span>of revenue reinvested or donated</span></div>
+      </div>
+      <div class="stat-badge glass sb-1"><b>$7</b><span>per hour</span></div>
+      <div class="stat-badge glass sb-2"><b>1 : 4</b><span>Coaching ratio</span></div>
+    </div>
+  </div>
+</section>
+
+<!-- ============================================================
+     MISSION STRIP
+     ============================================================ -->
+<section id="mission" style="padding-top:40px">
+  <div class="container">
+    <div class="section-head reveal">
+      <p class="eyebrow">Our Mission</p>
+      <h2 style="margin:14px 0 20px">Democratizing elite technical swim instruction.</h2>
+      <p class="lead">Surge was founded on a simple observation: the drills, corrections, and progressions taught by $200-an-hour technique coaches are the same ones a national-level swimmer has already lived through. We deliver that knowledge in small groups, at a price built for real families, and we put every dollar back into the water.</p>
+    </div>
+
+    <div class="grid grid-3">
+      <div class="card reveal">
+        <div class="icon"><svg viewBox="0 0 24 24"><path d="M3 17c2 0 2-2 4-2s2 2 4 2 2-2 4-2 2 2 4 2M3 12c2 0 2-2 4-2s2 2 4 2 2-2 4-2 2 2 4 2M3 7c2 0 2-2 4-2s2 2 4 2 2-2 4-2 2 2 4 2"/></svg></div>
+        <h3>Proven technical mastery</h3>
+        <p class="muted" style="margin-top:10px">Founded by Thomas Bai, a national-level swimmer and experienced instructor who reached elite standards through the same biomechanical coaching we now make accessible.</p>
+      </div>
+      <div class="card reveal">
+        <div class="icon"><svg viewBox="0 0 24 24"><rect x="3" y="4" width="18" height="13" rx="2.5"/><path d="M8 21h8M12 17v4M9 10.5l2 2 4-4"/></svg></div>
+        <h3>Video analysis &amp; race analytics</h3>
+        <p class="muted" style="margin-top:10px">Every swimmer is filmed, measured, and tracked (stroke count, distance per stroke, tempo, and turn splits) so progress is a number, not a feeling.</p>
+      </div>
+      <div class="card reveal">
+        <div class="icon"><svg viewBox="0 0 24 24"><circle cx="9" cy="8" r="3.5"/><circle cx="17" cy="9" r="2.5"/><path d="M2.5 20c0-3.6 2.9-6 6.5-6s6.5 2.4 6.5 6M15 15.5c3 0 6 1.8 6 4.5"/></svg></div>
+        <h3>Volunteer-powered, non-profit</h3>
+        <p class="muted" style="margin-top:10px">Trained student-athlete volunteers coach alongside the founder. That keeps costs low, and 100% of revenue funds pool time, gear, growth, and community donations, never personal profit.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ============================================================
+     3. THE PROBLEM & DATA RESEARCH
+     ============================================================ -->
+<section id="research" class="data-section">
+  <div class="container" style="position:relative">
+    <div class="section-head reveal">
+      <p class="eyebrow">Data &amp; Research</p>
+      <h2 style="margin:14px 0 20px">Why Surge exists.</h2>
+      <p class="lead">Top-tier coaching has quietly become a luxury good. The numbers below explain the gap we're built to close. Full citations are listed in the bibliography.</p>
+    </div>
+
+    <div class="grid grid-3">
+      <!-- Card 1 -->
+      <article class="card glass data-card reveal">
+        <span class="badge">01 · Coaching Fees</span>
+        <div class="big">$150–250</div>
+        <h3>per hour for private technical coaching</h3>
+        <p class="muted" style="margin-top:12px">Specialized 1-on-1 stroke and biomechanics coaches, particularly former elite competitors, commonly bill well above $120 an hour, with premium technical analysis reaching $150–$250. At two sessions a week, that is more than a car payment for one child's technique work. Meanwhile, families already spent an average of $1,016 on a child's primary sport in 2024, up 46% since 2019, roughly twice the rate of general inflation.</p>
+        <p class="cite"><sup>1, 2</sup> Aspen Institute Project Play, <em>Parent Survey: Family Spending on Youth Sports</em> (2025); national swim-instruction pricing surveys (2025–26). See bibliography.</p>
+      </article>
+
+      <!-- Card 2 -->
+      <article class="card glass data-card reveal">
+        <span class="badge">02 · Household Pressure</span>
+        <div class="big">3.5%</div>
+        <h3>rise in consumer prices in the year to June 2026</h3>
+        <p class="muted" style="margin-top:12px">Inflation has not returned to the 2% target. The Consumer Price Index rose 3.5% over the year ending June 2026, with shelter up 3.3% and food up 3.0%, on top of the 2021–2023 surge that permanently raised the baseline cost of housing, groceries, and utilities. When fixed costs climb faster than wages, discretionary line items like private sports lessons are the first cut in a middle-income budget.</p>
+        <p class="cite"><sup>3, 4</sup> U.S. Bureau of Labor Statistics, <em>Consumer Price Index, June 2026</em> and <em>December 2025</em> releases. See bibliography.</p>
+      </article>
+
+      <!-- Card 3 -->
+      <article class="card glass data-card reveal">
+        <span class="badge">03 · The Access Gap</span>
+        <div class="big">20.2 pts</div>
+        <h3>participation gap between high- and low-income kids</h3>
+        <p class="muted" style="margin-top:12px">In 2012, the gap in regular sports participation between children in households earning under $25,000 and those earning $100,000+ was 13.6 percentage points. By 2024 it had widened to 20.2 points. Children from the wealthiest homes are now twice as likely to play travel sports, and lower-income kids are far more likely to quit for cost reasons. Cost, not talent, is deciding who keeps improving.</p>
+        <p class="cite"><sup>5, 6</sup> Aspen Institute Project Play, <em>State of Play 2025</em>, with Sports &amp; Fitness Industry Association (SFIA) participation data. See bibliography.</p>
+      </article>
+    </div>
+
+    <p class="center muted reveal" style="margin-top:40px;font-size:14px">
+      <a href="#bibliography" class="link-arrow">Read full citations
+        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M13 6l6 6-6 6"/></svg>
+      </a>
+    </p>
+  </div>
+</section>
+
+<!-- ============================================================
+     4. THE SURGE DIFFERENCE, COMPARISON
+     ============================================================ -->
+<section id="difference">
+  <div class="container">
+    <div class="section-head reveal">
+      <p class="eyebrow">The Surge Difference</p>
+      <h2 style="margin:14px 0 20px">Same technique. Different economics.</h2>
+      <p class="lead">We didn't lower the standard. We changed who's allowed to reach it.</p>
+    </div>
+
+    <div class="compare reveal">
+      <table>
+        <thead>
+          <tr>
+            <th style="width:40%">Feature</th>
+            <th>Private $200/hr Coach</th>
+            <th class="surge-col">Surge Group Clinics</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td>Biomechanical stroke analysis</td>
+            <td><span class="check"><svg viewBox="0 0 24 24"><path d="M20 6 9 17l-5-5"/></svg></span>Yes</td>
+            <td class="surge-col"><span class="check"><svg viewBox="0 0 24 24"><path d="M20 6 9 17l-5-5"/></svg></span>Yes, filmed above &amp; below water</td>
+          </tr>
+          <tr>
+            <td>Race turn &amp; underwater acceleration</td>
+            <td><span class="check"><svg viewBox="0 0 24 24"><path d="M20 6 9 17l-5-5"/></svg></span>Yes</td>
+            <td class="surge-col"><span class="check"><svg viewBox="0 0 24 24"><path d="M20 6 9 17l-5-5"/></svg></span>Yes, timed in/out splits</td>
+          </tr>
+          <tr>
+            <td>Progress tracked with data</td>
+            <td><span class="cross"><svg viewBox="0 0 24 24"><path d="M18 6 6 18M6 6l12 12"/></svg></span>Varies</td>
+            <td class="surge-col"><span class="check"><svg viewBox="0 0 24 24"><path d="M20 6 9 17l-5-5"/></svg></span>Every swimmer, every block</td>
+          </tr>
+          <tr>
+            <td>Affordable pricing</td>
+            <td><span class="cross"><svg viewBox="0 0 24 24"><path d="M18 6 6 18M6 6l12 12"/></svg></span>$150–$250 / hr</td>
+            <td class="surge-col"><span class="check"><svg viewBox="0 0 24 24"><path d="M20 6 9 17l-5-5"/></svg></span>$7 / hour · scholarships available</td>
+          </tr>
+          <tr>
+            <td>Peer motivation</td>
+            <td><span class="cross"><svg viewBox="0 0 24 24"><path d="M18 6 6 18M6 6l12 12"/></svg></span>Solo</td>
+            <td class="surge-col"><span class="check"><svg viewBox="0 0 24 24"><path d="M20 6 9 17l-5-5"/></svg></span>Groups of 4, matched by level</td>
+          </tr>
+          <tr>
+            <td>Community non-profit impact</td>
+            <td><span class="cross"><svg viewBox="0 0 24 24"><path d="M18 6 6 18M6 6l12 12"/></svg></span>None</td>
+            <td class="surge-col"><span class="check"><svg viewBox="0 0 24 24"><path d="M20 6 9 17l-5-5"/></svg></span>100% reinvested or donated</td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+</section>
+
+<div class="divider"></div>
+
+<!-- ============================================================
+     5. PROGRAMS & TRANSPARENT PRICING
+     ============================================================ -->
+<section id="programs" style="background:var(--bg-alt)">
+  <div class="container">
+    <div class="section-head reveal">
+      <p class="eyebrow">Group Programs</p>
+      <h2 style="margin:14px 0 20px">Three clinics. One standard.</h2>
+      <p class="lead">Each clinic runs as a 4-week block of 60-minute sessions at $7 per hour, in groups of four matched by level. Filmed every week.</p>
+    </div>
+
+    <div class="grid grid-3">
+      <!-- Program 1 -->
+      <article class="card program reveal">
+        <span class="badge">Technical Stroke Clinic</span>
+        <h3 style="margin-top:14px">Build an efficient stroke from the water up.</h3>
+        <ul>
+          <li><svg viewBox="0 0 24 24"><path d="M20 6 9 17l-5-5"/></svg>Body position, streamline &amp; kick timing</li>
+          <li><svg viewBox="0 0 24 24"><path d="M20 6 9 17l-5-5"/></svg>Catch &amp; pull mechanics in all four strokes</li>
+          <li><svg viewBox="0 0 24 24"><path d="M20 6 9 17l-5-5"/></svg>Weekly stroke-count &amp; efficiency score</li>
+        </ul>
+        <div class="price"><b>$7</b><span class="muted">/ hour</span><s>$150+ private</s></div>
+      </article>
+
+      <!-- Program 2 -->
+      <article class="card program reveal">
+        <span class="badge">Starts &amp; Underwater Kick Power</span>
+        <h3 style="margin-top:14px">Win the first 15 meters and every wall.</h3>
+        <ul>
+          <li><svg viewBox="0 0 24 24"><path d="M20 6 9 17l-5-5"/></svg>Block setup, reaction &amp; entry angle</li>
+          <li><svg viewBox="0 0 24 24"><path d="M20 6 9 17l-5-5"/></svg>Dolphin-kick amplitude, tempo &amp; breakout</li>
+          <li><svg viewBox="0 0 24 24"><path d="M20 6 9 17l-5-5"/></svg>Timed 15 m splits and turn in/out</li>
+        </ul>
+        <div class="price"><b>$7</b><span class="muted">/ hour</span><s>$150+ private</s></div>
+      </article>
+
+      <!-- Program 3 -->
+      <article class="card program reveal">
+        <span class="badge">Video Analysis &amp; Race Strategy</span>
+        <h3 style="margin-top:14px">See your race the way an analyst does.</h3>
+        <ul>
+          <li><svg viewBox="0 0 24 24"><path d="M20 6 9 17l-5-5"/></svg>Frame-by-frame review of your own races</li>
+          <li><svg viewBox="0 0 24 24"><path d="M20 6 9 17l-5-5"/></svg>Pacing models &amp; split targets by event</li>
+          <li><svg viewBox="0 0 24 24"><path d="M20 6 9 17l-5-5"/></svg>Personal before/after progress report</li>
+        </ul>
+        <div class="price"><b>$7</b><span class="muted">/ hour</span><s>$200+ private</s></div>
+      </article>
+    </div>
+
+    <!-- Transparent pricing -->
+    <div class="card glass reveal" style="margin-top:48px">
+      <div style="display:flex;justify-content:space-between;gap:24px;flex-wrap:wrap;align-items:flex-end">
+        <div>
+          <p class="eyebrow">Transparent Non-Profit Pricing</p>
+          <h3 style="margin-top:10px;font-size:26px">Where every $7 goes.</h3>
+        </div>
+        <p class="muted" style="max-width:52ch;font-size:14px">Founders and volunteers are paid $0. A semester income-and-expense summary is published to families and our school advisor. Roughly one in five roster spots is reserved as free or sliding-scale.</p>
+      </div>
+      <div class="dollar-bar">
+        <div style="flex:55;background:#0071E3"></div>
+        <div style="flex:15;background:#3E93EC"></div>
+        <div style="flex:15;background:#8CBDF3"></div>
+        <div style="flex:15;background:#0A1128"></div>
+      </div>
+      <div class="dollar-legend">
+        <div><i style="background:#0071E3"></i>Pool &amp; lane rental<b>55%</b></div>
+        <div><i style="background:#3E93EC"></i>Equipment &amp; cameras<b>15%</b></div>
+        <div><i style="background:#8CBDF3"></i>Club growth &amp; scholarships<b>15%</b></div>
+        <div><i style="background:#0A1128;outline:1px solid var(--line)"></i>Community donations<b>15%</b></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ============================================================
+     6. JOIN, ATHLETES & VOLUNTEERS
+     ============================================================ -->
+<section id="join">
+  <div class="container">
+    <div class="section-head reveal">
+      <p class="eyebrow">Get In the Water</p>
+      <h2 style="margin:14px 0 20px">Two ways to be part of Surge.</h2>
+    </div>
+    <div class="grid grid-2">
+      <div class="join-card dark reveal">
+        <span class="badge" style="background:rgba(255,255,255,.14);color:#fff;align-self:flex-start">For Families</span>
+        <h3 style="font-size:30px;margin-top:16px;letter-spacing:-.02em">Request a spot in our next cohort.</h3>
+        <p style="margin-top:12px">Tell us your swimmer's age, level, and goals. We place them in a group of four matched by ability and send a placement confirmation within a week. Sliding-scale and free spots are available, just ask.</p>
+        <a href="#contact" class="btn">Request a Spot</a>
+      </div>
+      <div class="join-card blue reveal" id="volunteers">
+        <span class="badge" style="background:rgba(255,255,255,.18);color:#fff;align-self:flex-start">For Elite Swimmers</span>
+        <h3 style="font-size:30px;margin-top:16px;letter-spacing:-.02em">Apply to the volunteer coaching roster.</h3>
+        <p style="margin-top:12px">Complete the 6-hour Surge Instructor Track (safety protocol, teaching progressions, video analysis, and two shadowed sessions), then lead your own group. Earn logged volunteer hours, a coaching title, and a letter of service.</p>
+        <a href="apply.html" class="btn">Apply as a Volunteer Coach</a>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ============================================================
+     7. LEADERSHIP & ORGANIZATION
+     ============================================================ -->
+<section id="leadership" style="background:var(--bg-alt)">
+  <div class="container">
+    <div class="section-head reveal">
+      <p class="eyebrow">Leadership</p>
+      <h2 style="margin:14px 0 20px">Coached by someone who has done it.</h2>
+    </div>
+
+    <div class="card glass founder-card reveal">
+      <div class="founder-mark"><img src="assets/surge-emblem.png" alt=""></div>
+      <div>
+        <p class="role">Founder · Executive Director · Head Technical Coach</p>
+        <h3 style="font-size:32px;letter-spacing:-.02em">Thomas Bai</h3>
+        <p class="muted" style="margin-top:14px;max-width:64ch">National-level competitive swimmer and experienced swim instructor. Thomas founded Surge to bring the same technical coaching he received on the way to national standards to families who cannot pay private-coach prices. He oversees all operations, sets strategic goals, leads team meetings, designs the curriculum, trains every volunteer instructor, and acts as the primary face of the organization.</p>
+        <div class="founder-tags">
+          <span class="badge">National-level swimmer</span>
+          <span class="badge">Swim instructor</span>
+          <span class="badge">Curriculum &amp; instructor training</span>
+          <span class="badge">Video analysis &amp; race analytics</span>
+        </div>
+      </div>
+    </div>
+
+    <div class="section-head reveal" style="margin-top:96px;margin-bottom:48px">
+      <p class="eyebrow">Organization</p>
+      <h2 style="margin:14px 0 20px;font-size:clamp(28px,3.6vw,40px)">How Surge is run.</h2>
+      <p class="lead">Surge is structured like a real organization, with defined roles, clear ownership, and logged hours. Every role except Executive Director is currently open to student volunteers.</p>
+    </div>
+
+    <div class="grid grid-3 roles">
+      <article class="card reveal"><p class="role">Executive Director / President</p><h3>Thomas Bai</h3><p class="muted">Oversees all operations, sets strategic goals, leads team meetings, and acts as the primary face of the organization.</p></article>
+      <article class="card reveal"><p class="role">Vice President</p><h3>Open <span class="open-pill">Volunteer</span></h3><p class="muted">The primary second-in-command. Drives internal team performance, manages special initiatives, and steps in for the Executive Director to ensure the organization runs smoothly.</p></article>
+      <article class="card reveal"><p class="role">Leading Instructor</p><h3>Open <span class="open-pill">Volunteer</span></h3><p class="muted">Demonstrates strokes to swimmers in person, on deck and in the water, showing exactly how to gain better form, technique, and efficiency.</p></article>
+      <article class="card reveal"><p class="role">Volunteer Swim Instructors</p><h3>Open <span class="open-pill">Volunteer</span></h3><p class="muted">Teach group or 1-on-1 lessons, demonstrate proper stroke mechanics, and ensure student safety in the water.</p></article>
+      <article class="card reveal"><p class="role">Secretary</p><h3>Open <span class="open-pill">Volunteer</span></h3><p class="muted">Takes meeting notes, keeps track of member attendance and hours, and handles internal club communication.</p></article>
+      <article class="card reveal"><p class="role">Outreach &amp; Event Officer</p><h3>Open <span class="open-pill">Volunteer</span></h3><p class="muted">Coordinates local school workshops, health drives, community presentations, and regional partnerships.</p></article>
+      <article class="card reveal"><p class="role">Director of Outreach &amp; Partnerships</p><h3>Open <span class="open-pill">Volunteer</span></h3><p class="muted">Reaches out to local community centers, schools, and pool facilities to secure affordable lane space and recruit students.</p></article>
+      <article class="card reveal"><p class="role">Marketing &amp; Communications Lead</p><h3>Open <span class="open-pill">Volunteer</span></h3><p class="muted">Manages social media, creates flyers, and runs campaigns to recruit student athletes and volunteers.</p></article>
+      <article class="card reveal"><p class="role">Parent &amp; Student Liaison</p><h3>Open <span class="open-pill">Volunteer</span></h3><p class="muted">Serves as the main point of contact for families, handling intake questions and feedback.</p></article>
+      <article class="card reveal"><p class="role">Lead Event Producer</p><h3>Open <span class="open-pill">Volunteer</span></h3><p class="muted">Directs large-scale events like end-of-season swim meets, showcase events, and community fundraising galas.</p></article>
+      <article class="card reveal"><p class="role">Chief Logistics Officer</p><h3>Open <span class="open-pill">Volunteer</span></h3><p class="muted">Coordinates physical equipment management, gear donations (goggles, caps, kickboards), and pool facility access schedules.</p></article>
+      <article class="card reveal roles-cta"><p class="role">Want a role?</p><h3>Apply to the team</h3><p class="muted">Every role earns logged volunteer hours, a title, and a letter of service.</p><a href="apply.html" class="btn btn-primary btn-sm" style="margin-top:18px;align-self:flex-start">Apply Now</a></article>
+    </div>
+  </div>
+</section>
+
+</main>
+
+<!-- ============================================================
+     8. FOOTER
+     ============================================================ -->
+<footer id="contact">
+  <div class="container">
+    <div class="foot-grid">
+      <div>
+        <!-- ===== LOGO SLOT 3: FOOTER (high-contrast, white variant) ===== -->
+        <div class="foot-logo"><img src="assets/surge-logo-dark.png" alt="Surge"></div>
+        <p style="font-size:14px;color:#A1A1A6;max-width:34ch">Elite technical swimming, built for everyone. A student-led, volunteer-run non-profit initiative based in Waxhaw, North Carolina.</p>
+        <p style="font-size:13px;color:#8E8E93;margin-top:20px;max-width:36ch"><strong style="color:#D2D2D7">Non-profit transparency:</strong> 100% of revenue funds pool rentals, equipment, club growth, and community donations. Founders and volunteers receive no compensation. Financial summaries are published each semester.</p>
+      </div>
+      <div>
+        <h4>Explore</h4>
+        <ul>
+          <li><a href="#mission">Mission</a></li>
+          <li><a href="#research">Data &amp; Research</a></li>
+          <li><a href="#programs">Programs</a></li>
+          <li><a href="#volunteers">Volunteers</a></li>
+          <li><a href="#leadership">Leadership</a></li>
+        </ul>
+      </div>
+      <div>
+        <h4>Join</h4>
+        <ul>
+          <li><a href="#join">Book a Group Session</a></li>
+          <li><a href="apply.html">Apply for a Role</a></li>
+          <li><a href="#programs">Scholarship Spots</a></li>
+          <li><a href="/cdn-cgi/l/email-protection#0b636e6767644b787e796c6e787c62662564796c"><span class="__cf_email__" data-cfemail="b2dad7dededdf2c1c7c0d5d7c1c5dbdf9cddc0d5">[email&#160;protected]</span></a></li>
+        </ul>
+      </div>
+      <div>
+        <h4>Contact</h4>
+        <form class="form" onsubmit="event.preventDefault();this.querySelector('button').textContent='Sent. We\'ll reply within a week.'">
+          <input type="text" placeholder="Name" required>
+          <input type="email" placeholder="Email" required>
+          <textarea rows="3" placeholder="I'm a parent / swimmer / volunteer interested in…" required></textarea>
+          <button class="btn btn-primary btn-sm" type="submit" style="justify-content:center">Send Message</button>
+        </form>
+      </div>
+    </div>
+
+    <!-- Bibliography -->
+    <div class="bib" id="bibliography">
+      <h4>References &amp; Bibliography</h4>
+      <ol>
+        <li>Aspen Institute Project Play. <em>Project Play survey: Family spending on youth sports rises 46% over five years.</em> February 2025. Average U.S. family spent $1,016 on a child's primary sport in 2024 (≈$1,500 including additional sports); +46% since 2019. <a href="https://projectplay.org/news/2025/2/24/project-play-survey-family-spending-on-youth-sports-rises-46-over-five-years" target="_blank" rel="noopener">projectplay.org</a></li>
+        <li>National swim-instruction pricing surveys (2025–2026): private lessons $40–$100+/hr; experienced coaches and former competitive swimmers commonly exceed $120/hr, with specialized technical analysis higher. <a href="https://sportssurge.alibaba.com/swimming/how-much-are-swimming-lessons" target="_blank" rel="noopener">2025 Pricing Guide</a>; <a href="https://lessons.com/costs/swimming-lessons-cost" target="_blank" rel="noopener">Lessons.com Cost Guide</a>.</li>
+        <li>U.S. Bureau of Labor Statistics. <em>Consumer prices up 3.5 percent over the year ended June 2026.</em> The Economics Daily, July 17, 2026. Shelter +3.3%, food +3.0%. <a href="https://www.bls.gov/opub/ted/2026/consumer-prices-up-3-5-percent-over-the-year-ended-june-2026.htm" target="_blank" rel="noopener">bls.gov</a></li>
+        <li>U.S. Bureau of Labor Statistics. <em>Consumer Price Index, December 2025.</em> News Release USDL-26-0042, January 13, 2026. All-items +2.7% y/y; food +3.1%. <a href="https://www.bls.gov/news.release/archives/cpi_01132026.htm" target="_blank" rel="noopener">bls.gov</a></li>
+        <li>Aspen Institute Project Play. <em>State of Play 2025.</em> Income-based participation gap (ages 6–17, households &lt;$25K vs. ≥$100K) widened from 13.6 points (2012) to 20.2 points (2024), per SFIA data; youth sports costs +46% since 2019. Summary: <a href="https://sgbonline.com/exec-youth-sports-participation-challenged-by-escalating-costs-income-disparity/" target="_blank" rel="noopener">SGB Executive, Dec. 2025</a>; <a href="https://projectplay.org" target="_blank" rel="noopener">projectplay.org</a>.</li>
+        <li>Aspen Institute Project Play / Utah State University Families in Sport Lab. <em>National Youth Sport Parent Survey</em>. Children in households earning ≥$100K are twice as likely to play travel sports as those earning &lt;$50K; low-income youth are significantly more likely to quit sports due to cost. <a href="https://projectplay.org/news/category/Analysis" target="_blank" rel="noopener">projectplay.org/analysis</a></li>
+      </ol>
+      <p style="font-size:12px;color:#8E8E93;margin-top:18px">"90%+ cost savings" compares Surge's $7 per hour group lesson with a conservative $75 per hour private-lesson midpoint; savings versus specialized $150–$250 per hour technical coaching exceed 95%. Surge is a student-led, volunteer-run non-profit initiative; it is not yet a registered 501(c)(3). All figures updated September 2026.</p>
+    </div>
+
+    <div class="foot-bottom">
+      <span>© 2026 Surge. Student-led non-profit swim initiative.</span>
+      <span>All sessions held at lifeguarded facilities with signed waivers.</span>
+    </div>
+  </div>
+</footer>
+
+<script data-cfasync="false" src="/cdn-cgi/scripts/5c5dd728/cloudflare-static/email-decode.min.js"></script><script>
+// Theme toggle (persists)
+const root=document.documentElement,tgl=document.getElementById('themeToggle');
+const saved=localStorage.getItem('surge-theme');
+if(saved)root.dataset.theme=saved;else if(matchMedia('(prefers-color-scheme: dark)').matches)root.dataset.theme='dark';
+tgl.addEventListener('click',()=>{root.dataset.theme=root.dataset.theme==='dark'?'light':'dark';localStorage.setItem('surge-theme',root.dataset.theme)});
+
+// Nav glass on scroll
+const nav=document.getElementById('nav');
+addEventListener('scroll',()=>nav.classList.toggle('scrolled',scrollY>12),{passive:true});
+
+// Mobile menu
+const burger=document.getElementById('burger'),mm=document.getElementById('mobileMenu');
+burger.addEventListener('click',()=>mm.classList.toggle('open'));
+mm.querySelectorAll('a').forEach(a=>a.addEventListener('click',()=>mm.classList.remove('open')));
+
+// Scroll reveal
+const io=new IntersectionObserver(es=>es.forEach(e=>{if(e.isIntersecting){e.target.classList.add('in');io.unobserve(e.target)}}),{threshold:.12});
+document.querySelectorAll('.reveal').forEach(el=>io.observe(el));
+</script>
+</body>
+</html>
